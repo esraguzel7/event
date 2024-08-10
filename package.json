@@ -5,16 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/fatihgvn/EventManager.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fatihgvn/EventManager/issues"
-  },
-  "homepage": "https://github.com/fatihgvn/EventManager#readme",
+  "homepage": "",
   "description": "",
   "dependencies": {
     "create-react-app": "^5.0.1",
