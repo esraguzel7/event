@@ -7,10 +7,12 @@ function Header() {
                 <div class="container">
                     <div class="row flex-nowrap justify-content-between align-items-center">
                         <div class="col-4 pt-1">
-                            <a class="text-muted" href="/">How it Work?</a>
+                            <a class="text-muted" href="/how-it-works">How it Work?</a>
                         </div>
                         <div class="col-4 text-center">
-                            <img src='./logo.png' class="logo" alt="logo" />
+                            <a href="/">
+                                <img src='/logo.png' class="logo" alt="logo" />
+                            </a>
                         </div>
                         <div class="col-4 d-flex justify-content-end align-items-center">
                             <a class="btn btn-sm btn-outline-secondary" href="/">Log in</a>&nbsp;
