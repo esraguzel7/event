@@ -113,6 +113,41 @@ footer.footer p:last-child {
   align-items: center;
 }
 
-/* .v-middle>* {
-  display: inline-block;
-} */
+
+.event .event-category{
+  color: #d40000;
+  font-size: .85rem;
+  margin-bottom: .25rem;
+}
+
+.event .event-title{
+  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: .25rem;
+}
+
+.event .event-date{
+  color: #606060;
+  margin-bottom: .25rem;
+}
+
+.event .event-date span{
+  color: #f00;
+  font-weight: bold;
+}
+
+.event .event-link{
+  padding: .5rem 2rem;
+  color: #fff;
+  background-color: #d40000;
+  font-size: .9rem;
+  font-weight: bold;
+  border-radius: .25rem;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.event .event-link:hover{
+  color: #d40000;
+  background-color: #ddd;
+  text-decoration: none;
+}
