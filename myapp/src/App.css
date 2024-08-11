@@ -1,3 +1,21 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333;
+  margin-bottom: .3rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
 header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
@@ -90,7 +108,7 @@ footer.footer p:last-child {
   background-color: rgba(33, 33, 33, 0.5);
 }
 
-.owl-carousel .slider-btn{
+.owl-carousel .slider-btn {
   color: #fff;
   background-color: #8a8888;
   padding: .25rem 1.25rem;
@@ -101,7 +119,7 @@ footer.footer p:last-child {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-.owl-carousel .slider-btn:hover{
+.owl-carousel .slider-btn:hover {
   text-decoration: none;
   cursor: pointer;
   color: #333;
@@ -114,29 +132,29 @@ footer.footer p:last-child {
 }
 
 
-.event .event-category{
+.event .event-category {
   color: #d40000;
   font-size: .85rem;
   margin-bottom: .25rem;
 }
 
-.event .event-title{
+.event .event-title {
   color: #333;
   font-size: 1.25rem;
   margin-bottom: .25rem;
 }
 
-.event .event-date{
+.event .event-date {
   color: #606060;
   margin-bottom: .25rem;
 }
 
-.event .event-date span{
+.event .event-date span {
   color: #f00;
   font-weight: bold;
 }
 
-.event .event-link{
+.event .event-link {
   padding: .5rem 2rem;
   color: #fff;
   background-color: #d40000;
@@ -146,8 +164,26 @@ footer.footer p:last-child {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-.event .event-link:hover{
+.event .event-link:hover {
   color: #d40000;
+  background-color: #ddd;
+  text-decoration: none;
+}
+
+.btn.btn-primary{
+  padding: .5rem 2rem;
+  color: #fff;
+  background-color: #d40000;
+  border-color: #b40505;
+  font-size: .9rem;
+  font-weight: bold;
+  border-radius: .25rem;
+  transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.btn.btn-primary:hover{
+  color: #d40000;
+  border-color: #a3a0a0;
   background-color: #ddd;
   text-decoration: none;
 }
