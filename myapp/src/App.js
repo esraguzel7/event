@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/home';
 import HowItWorks from './Pages/howitworks';
 import Login from './Pages/login';
+import SingUp from './Pages/singup';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path='how-it-works' element={<HowItWorks />} />
 
         <Route path='login' element={<Login />} />
+        <Route path='singup' element={<SingUp />} />
       </Routes>
     </BrowserRouter>
   )
