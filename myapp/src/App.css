@@ -1,21 +1,3 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #333;
-  margin-bottom: .3rem;
-}
-
-h1 {
-  font-size: 1.75rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
-
 header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
@@ -39,6 +21,8 @@ header .logo:hover {
 
 .nav-scroller .nav {
   display: -ms-flexbox;
+<<<<<<< HEAD
+<<<<<<< HEAD
   display: flex;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
@@ -108,7 +92,7 @@ footer.footer p:last-child {
   background-color: rgba(33, 33, 33, 0.5);
 }
 
-.owl-carousel .slider-btn {
+.owl-carousel .slider-btn{
   color: #fff;
   background-color: #8a8888;
   padding: .25rem 1.25rem;
@@ -119,7 +103,7 @@ footer.footer p:last-child {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-.owl-carousel .slider-btn:hover {
+.owl-carousel .slider-btn:hover{
   text-decoration: none;
   cursor: pointer;
   color: #333;
@@ -131,59 +115,84 @@ footer.footer p:last-child {
   align-items: center;
 }
 
-
-.event .event-category {
-  color: #d40000;
-  font-size: .85rem;
-  margin-bottom: .25rem;
+/* .v-middle>* {
+  display: inline-block;
+} */
+=======
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
-.event .event-title {
-  color: #333;
-  font-size: 1.25rem;
-  margin-bottom: .25rem;
+.nav-scroller .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
 }
 
-.event .event-date {
-  color: #606060;
-  margin-bottom: .25rem;
+footer.footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
 }
 
-.event .event-date span {
-  color: #f00;
-  font-weight: bold;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
-.event .event-link {
-  padding: .5rem 2rem;
-  color: #fff;
-  background-color: #d40000;
-  font-size: .9rem;
-  font-weight: bold;
-  border-radius: .25rem;
-  transition: color 0.5s ease, background-color 0.5s ease;
+.nav-scroller .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
 }
 
-.event .event-link:hover {
-  color: #d40000;
-  background-color: #ddd;
-  text-decoration: none;
+footer.footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
 }
 
-.btn.btn-primary{
-  padding: .5rem 2rem;
-  color: #fff;
-  background-color: #d40000;
-  border-color: #b40505;
-  font-size: .9rem;
-  font-weight: bold;
-  border-radius: .25rem;
-  transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
+footer.footer p:last-child {
+  margin-bottom: 0;
 }
 
-.btn.btn-primary:hover{
-  color: #d40000;
-  border-color: #a3a0a0;
-  background-color: #ddd;
-  text-decoration: none;
+.owl-carousel .owl-dots{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.owl-carousel .owl-dots .owl-dot span{
+  width: 6px;
+  height: 6px;
+  opacity: 0.75;
+
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.owl-carousel .owl-dots .owl-dot.active span{
+  width: 50px;
+
+}
+
+
+}
+
