@@ -1,6 +1,9 @@
 import React from "react";
+import Api from "./Api";
 
 function Header() {
+    var api = new Api();
+
     return (
         <React.Fragment>
             <header class="blog-header py-3">
@@ -24,18 +27,9 @@ function Header() {
             <div class="container">
                 <div class="nav-scroller py-1 mb-2">
                     <nav class="nav d-flex justify-content-between">
-                        <a class="p-2 text-muted" href="/">Group 1</a>
-                        <a class="p-2 text-muted" href="/">Group 2</a>
-                        <a class="p-2 text-muted" href="/">Group 3</a>
-                        <a class="p-2 text-muted" href="/">Group 4</a>
-                        <a class="p-2 text-muted" href="/">Group 5</a>
-                        <a class="p-2 text-muted" href="/">Group 6</a>
-                        <a class="p-2 text-muted" href="/">Group 7</a>
-                        <a class="p-2 text-muted" href="/">Group 8</a>
-                        <a class="p-2 text-muted" href="/">Group 9</a>
-                        <a class="p-2 text-muted" href="/">Group 10</a>
-                        <a class="p-2 text-muted" href="/">Group 11</a>
-                        <a class="p-2 text-muted" href="/">Group 12</a>
+                        {api.getEventCategories().map((data, index) => (
+                            <a class="p-2 text-muted" href={"/events/" + data.url}>{data.name}</a>
+                        ))}
                     </nav>
                 </div>
             </div>
