@@ -44,6 +44,27 @@ app.get('/event-categories', (request, response) => {
     })
 })
 
+/**
+ * singup user
+ */
+app.post('/singup', (request, response) => {
+    if (!(
+        'email' in request.body &&
+        'name' in request.body &&
+        'surname' in request.body &&
+        'password' in request.body
+    ))
+        return response.json({ 'status': false, 'message': 'Make sure you fill in all fields' })
+
+    const sql = "INSERT INTO user (name, surname, email, password) VALUES (?, ?, ?, ?)";
+    const values = [request.body.name, request.body.surname, request.body.email, request.body.password];
+
+    connection.query(sql, values, function (err, result) {
+        if (err) return response.json({ 'status': false, 'message': 'An error has occurred. Please make sure you have entered your details correctly' });
+        return response.json({ 'status': true, 'message': 'Welcome aboard' });
+    });
+})
+
 app.listen(process.env.APP_PORT, () => {
     console.log('Service is up!');
 })
