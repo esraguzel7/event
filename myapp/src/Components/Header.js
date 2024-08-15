@@ -19,7 +19,7 @@ function Header() {
                         </div>
                         <div class="col-4 d-flex justify-content-end align-items-center">
                             <a class="btn btn-sm btn-outline-secondary" href="/login">Log in</a>&nbsp;
-                            <a class="btn btn-sm btn-outline-secondary" href="/singup">Sign up</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="/singup">Sign Up</a>
                         </div>
                     </div>
                 </div>
