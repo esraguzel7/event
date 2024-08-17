@@ -45,9 +45,9 @@ app.get('/event-categories', (request, response) => {
 })
 
 /**
- * singup user
+ * signup user
  */
-app.post('/singup', (request, response) => {
+app.post('/signup', (request, response) => {
     if (!(
         'email' in request.body &&
         'name' in request.body &&
