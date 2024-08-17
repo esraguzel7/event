@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 dotenv.config();
 
@@ -62,6 +63,36 @@ app.post('/signup', (request, response) => {
     connection.query(sql, values, function (err, result) {
         if (err) return response.json({ 'status': false, 'message': 'An error has occurred. Please make sure you have entered your details correctly' });
         return response.json({ 'status': true, 'message': 'Welcome aboard' });
+    });
+})
+
+/**
+ * login user
+ */
+app.post('/login', (request, response) => {
+    if (!(
+        'email' in request.body &&
+        'password' in request.body
+    ))
+        return response.json({ 'status': false, 'message': 'Make sure you fill in all fields' })
+
+    const sql = "SELECT * FROM user WHERE email=? AND password=? LIMIT 1";
+    const values = [request.body.email, request.body.password];
+
+    connection.query(sql, values, function (err, result) {
+        if (err) return response.json({ 'status': false, 'message': 'Incorrect entry' });
+
+        if (result.length !== 1)
+            return response.json({ 'status': false, 'message': 'Incorrect entry' });
+
+        let user = result[0]
+        let token = jwt.sign({ 
+            'id': user.id,
+            'name': user.name,
+            'surname': user.surname,
+            'email': user.email
+        }, process.env.JWT_SECRET, { expiresIn: '6h' })
+        return response.json({ 'status': true, 'message': 'Welcome back', 'token': token });
     });
 })
 
