@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
+const API_URL = "http://localhost:5001";
+
 class Api {
-    api_url = "http://localhost:5000"
+    api_url = API_URL
 
     getEventCategories = function () {
         const [data, setData] = useState([])
