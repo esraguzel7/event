@@ -1,6 +1,5 @@
 import React from "react";
 import ShowMessages from "../Components/ShowMessages";
-import API_URL from "../Components/Api";
 
 function SingUp() {
     return (
@@ -69,8 +68,6 @@ async function SingUpEvent(e) {
     }
 
     try {
-        console.log(API_URL);
-        
         const response = await fetch('http://localhost:5001/signup', {
             headers: {
                 'Content-type': 'application/json'
