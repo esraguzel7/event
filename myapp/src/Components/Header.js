@@ -44,7 +44,7 @@ function MenuButtons() {
         return (
             <React.Fragment>
                 <a class="btn btn-sm btn-outline-secondary" href="/login">Log in</a>&nbsp;
-                <a class="btn btn-sm btn-outline-secondary" href="/singup">Sign Up</a>
+                <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign Up</a>
             </React.Fragment>
         );
 

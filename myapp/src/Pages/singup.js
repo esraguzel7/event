@@ -1,7 +1,7 @@
 import React from "react";
 import ShowMessages from "../Components/ShowMessages";
 
-function SingUp() {
+function Signup() {
     return (
         <React.StrictMode>
             <div className="container mt-5">
@@ -14,26 +14,26 @@ function SingUp() {
                         <h2>Join Us</h2>
                         <p>We are here for you to find the missing colors in your life...</p>
 
-                        <form method="post" onSubmit={SingUpEvent}>
+                        <form method="post" onSubmit={signupEvent}>
                             <div class="form-group">
-                                <label for="___singup__name">Name</label>
-                                <input type="text" name="name" class="form-control" id="___singup__name" placeholder="Enter your name" />
+                                <label for="___signup__name">Name</label>
+                                <input type="text" name="name" class="form-control" id="___signup__name" placeholder="Enter your name" />
                             </div>
                             <div class="form-group">
-                                <label for="___singup__surname">Surname</label>
-                                <input type="text" name="surname" class="form-control" id="___singup__surname" placeholder="Enter your surname" />
+                                <label for="___signup__surname">Surname</label>
+                                <input type="text" name="surname" class="form-control" id="___signup__surname" placeholder="Enter your surname" />
                             </div>
                             <div class="form-group">
-                                <label for="___singup__email">Email address</label>
-                                <input type="email" name="email" class="form-control" id="___singup__email" placeholder="Enter email" />
+                                <label for="___signup__email">Email address</label>
+                                <input type="email" name="email" class="form-control" id="___signup__email" placeholder="Enter email" />
                             </div>
                             <div class="form-group">
-                                <label for="___singup__password">Password</label>
-                                <input type="password" name="password" class="form-control" id="___singup__password" placeholder="Password" />
+                                <label for="___signup__password">Password</label>
+                                <input type="password" name="password" class="form-control" id="___signup__password" placeholder="Password" />
                             </div>
                             <div class="form-group">
-                                <label for="___singup__confirmpassword">Confirm Password</label>
-                                <input type="password" name="confirm_password" class="form-control" id="___singup__confirmpassword" placeholder="Confirm Password" />
+                                <label for="___signup__confirmpassword">Confirm Password</label>
+                                <input type="password" name="confirm_password" class="form-control" id="___signup__confirmpassword" placeholder="Confirm Password" />
                             </div>
                             <button type="submit" class="btn btn-primary">Sing Up</button>
                         </form>
@@ -44,7 +44,7 @@ function SingUp() {
     );
 }
 
-async function SingUpEvent(e) {
+async function signupEvent(e) {
     e.preventDefault();
 
     const password = e.target.querySelector('input[name=password]').value;
@@ -101,4 +101,4 @@ async function SingUpEvent(e) {
 
 }
 
-export default SingUp;
+export default Signup;
