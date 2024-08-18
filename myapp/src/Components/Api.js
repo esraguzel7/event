@@ -28,6 +28,12 @@ class Api {
 
         return data
     }
+
+    isLogined = function () {
+        if(localStorage.getItem('token'))
+            return true;
+        return false;
+    }
 }
 
 export default Api;
