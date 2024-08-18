@@ -1,8 +1,9 @@
 import React from "react";
 import Api from "./Api";
 
+var api = new Api();
+
 function Header() {
-    var api = new Api();
 
     return (
         <React.Fragment>
@@ -18,8 +19,7 @@ function Header() {
                             </a>
                         </div>
                         <div class="col-4 d-flex justify-content-end align-items-center">
-                            <a class="btn btn-sm btn-outline-secondary" href="/login">Log in</a>&nbsp;
-                            <a class="btn btn-sm btn-outline-secondary" href="/singup">Sign Up</a>
+                            <MenuButtons />
                         </div>
                     </div>
                 </div>
@@ -35,6 +35,32 @@ function Header() {
             </div>
         </React.Fragment>
     );
+}
+
+function MenuButtons() {
+    var userInfo = api.getUserInfo();
+
+    if (userInfo === undefined)
+        return (
+            <React.Fragment>
+                <a class="btn btn-sm btn-outline-secondary" href="/login">Log in</a>&nbsp;
+                <a class="btn btn-sm btn-outline-secondary" href="/singup">Sign Up</a>
+            </React.Fragment>
+        );
+
+
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        localStorage.clear()
+        window.location = '/'
+    }
+
+    return (
+        <React.Fragment>
+            <a class="btn btn-sm btn-outline-secondary" href="/my-events">My Events</a>&nbsp;
+            <a class="btn btn-sm btn-outline-danger" href="/" onClick={(e) => logoutHandler(e)}>Logout</a>
+        </React.Fragment>
+    )
 }
 
 export default Header;
