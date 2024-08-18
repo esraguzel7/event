@@ -12,4 +12,9 @@ function ShowSuccessMessage(message) {
     return html;
 };
 
-export default { ShowErrorMessage, ShowSuccessMessage }
+const ShowMessage = {
+    ShowErrorMessage,
+    ShowSuccessMessage
+}
+
+export default ShowMessage
