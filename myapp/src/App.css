@@ -199,3 +199,12 @@ footer.footer p:last-child {
 .mw-350 {
   max-width: 350px;
 }
+
+.card-header{
+  background-color: #d40000;
+}
+
+.card-header h3{
+  margin-bottom: 0;
+  color: #fff;
+}

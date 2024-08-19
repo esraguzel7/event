@@ -175,6 +175,7 @@ app.get('/get-event', (request, response) => {
     const sql = "SELECT * FROM events WHERE id = ?";
     const categorySql = "SELECT id, name, url FROM event_categories WHERE id = ?";
     const userSql = "SELECT name, surname, email FROM user WHERE id = ?";
+    const participantsSql = "SELECT COUNT(*) AS participant_count FROM participants WHERE event = ?";
 
     connection.query(sql, [request.query.id], (err, data) => {
         if (err) return response.json(err);
@@ -193,11 +194,18 @@ app.get('/get-event', (request, response) => {
 
                 result['user'] = userData.length > 0 ? JSON.parse(JSON.stringify(userData[0])) : undefined;
 
-                return response.json(result);
+                connection.query(participantsSql, [request.query.id], (participantErr, participantData) => {
+                    if (participantErr) return response.json(participantErr);
+
+                    // Katılımcı sayısını result'a ekle
+                    result['participant_count'] = participantData[0].participant_count;
+
+                    return response.json(result);
+                });
             });
-        })
-    })
-})
+        });
+    });
+});
 
 /**
  * get events

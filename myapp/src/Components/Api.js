@@ -61,10 +61,7 @@ class Api {
                 .catch(error => console.log(error));
         }, [id]);
 
-
-        if (Array.isArray(data))
-            return data;
-        return [];
+        return data;
     }
 
     getEvents = function (category = undefined, limit = undefined) {
