@@ -30,9 +30,35 @@ class Api {
     }
 
     isLogined = function () {
-        if(localStorage.getItem('token'))
+        if (localStorage.getItem('token'))
             return true;
         return false;
+    }
+
+    getUserEvents = function () {
+        const [data, setData] = useState([])
+
+        useEffect(() => {
+            fetch(this.api_url + '/user-events?user=' + this.getUserInfo().id)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, []);
+
+        return data;
+    }
+
+    getSingleEvent = function (id) {
+        const [data, setData] = useState([])
+
+        useEffect(() => {
+            fetch(this.api_url + '/get-event?id=' + id)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, [id]);
+
+        return data;
     }
 }
 

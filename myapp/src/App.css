@@ -16,6 +16,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+h3 {
+  font-size: 1.25rem;
+}
+
 header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
@@ -170,7 +174,7 @@ footer.footer p:last-child {
   text-decoration: none;
 }
 
-.btn.btn-primary{
+.btn.btn-primary {
   padding: .5rem 2rem;
   color: #fff;
   background-color: #d40000;
@@ -181,13 +185,17 @@ footer.footer p:last-child {
   transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
 }
 
-.btn.btn-primary:hover{
+.btn.btn-primary:hover {
   color: #d40000;
   border-color: #a3a0a0;
   background-color: #ddd;
   text-decoration: none;
 }
 
-.owl-carousel h2{
+.owl-carousel h2 {
   color: #fff;
+}
+
+.mw-350 {
+  max-width: 350px;
 }

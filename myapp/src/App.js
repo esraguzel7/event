@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/home';
 import HowItWorks from './Pages/howitworks';
 import Login from './Pages/login';
-import SingUp from './Pages/singup';
+import MyEvents from './Pages/myevents';
+import Signup from './Pages/singup';
 
 function App() {
 
@@ -14,7 +15,9 @@ function App() {
         <Route path='how-it-works' element={<HowItWorks />} />
 
         <Route path='login' element={<Login />} />
-        <Route path='singup' element={<SingUp />} />
+        <Route path='signup' element={<Signup />} />
+
+        <Route path='my-events' element={<MyEvents />} />
       </Routes>
     </BrowserRouter>
   )
