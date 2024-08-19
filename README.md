@@ -37,4 +37,10 @@ JWT_SECRET=J9L9LxCZ36E4VBRM
 ```
 
 #### Database
-For database preparation, you should run the `database.sql` and `seed_event_categories.sql` files in the EventManager directory on your mysql server.
+For database preparation, you should run the `database.sql` and `seed.sql` files in the EventManager directory on your mysql server.
+
+### Admin User
+
+Name|Surname|Email|Default Password
+---|---|---|---
+system|admin|admin@event360.com|123456
