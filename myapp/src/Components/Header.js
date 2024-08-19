@@ -28,7 +28,7 @@ function Header() {
                 <div class="nav-scroller py-1 mb-2">
                     <nav class="nav d-flex justify-content-between">
                         {api.getEventCategories().map((data, index) => (
-                            <a class="p-2 text-muted" href={"/events/" + data.url}>{data.name}</a>
+                            <a class="p-2 text-muted" href={"/events/" + data.id}>{data.name}</a>
                         ))}
                     </nav>
                 </div>

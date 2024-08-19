@@ -45,7 +45,10 @@ class Api {
                 .catch(error => console.log(error));
         }, []);
 
-        return data;
+
+        if (Array.isArray(data))
+            return data;
+        return [];
     }
 
     getSingleEvent = function (id) {
@@ -58,7 +61,10 @@ class Api {
                 .catch(error => console.log(error));
         }, [id]);
 
-        return data;
+
+        if (Array.isArray(data))
+            return data;
+        return [];
     }
 
     getEvents = function (category = undefined, limit = undefined) {
@@ -69,11 +75,16 @@ class Api {
         if (category !== undefined || limit !== undefined)
             query = '?'
 
-        if (category !== undefined)
-            query = query + 'category=' + category + (limit !== undefined) ? '&&' : ''
-        
+        if (category !== undefined) {
+            query += 'category=' + String(category)
+            query += (limit !== undefined) ? '&&' : ''
+        }
+
         if (limit !== undefined)
-            query = query + 'limit=' + limit
+            query += 'limit=' + limit
+
+        console.log(query);
+
 
 
         useEffect(() => {
@@ -83,7 +94,9 @@ class Api {
                 .catch(error => console.log(error));
         }, [query]);
 
-        return data;
+        if (Array.isArray(data))
+            return data;
+        return [];
     }
 }
 
