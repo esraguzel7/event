@@ -16,7 +16,12 @@ function SmallEvent(args) {
 
     var eventLink = (<a href={"/event/" + event.id} class="event-link">&#127881; Join the Event</a>);
     if ('isEditable' in args) {
-        eventLink = (<a href={"/my-events/edit/" + event.id} class="event-link">Edit Event</a>);
+        eventLink = (
+            <React.StrictMode>
+                <a href={"/my-events/edit/" + event.id} class="btn event-link">Edit Event</a>
+                <a href="/" class="btn btn-outline-danger event-delete-link" data-eventid={event.id} onClick={deleteEventHangler}>Del</a>
+            </React.StrictMode>
+        );
     }
 
     return (
@@ -35,6 +40,40 @@ function SmallEvent(args) {
             </div>
         </div>
     )
+}
+
+async function deleteEventHangler(e) {
+    e.preventDefault();
+
+    const body = {
+        user: api.getUserInfo().id,
+        eventid: e.target.getAttribute('data-eventid')
+    }
+
+    try {
+        const response = await fetch('http://localhost:5001/delete-event', {
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+        var result = data;
+
+        let message = result.message;
+
+        if (result.status === true)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2500);
+
+        e.target.innerText = message;
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 export default SmallEvent;

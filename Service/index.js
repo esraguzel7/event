@@ -387,6 +387,43 @@ app.get('/search-event', (request, response) => {
 });
 
 
+/**
+ * Delete Event
+ */
+app.post('/delete-event', (request, response) => {
+    const { user, eventid } = request.body;
+
+    if (!user || !eventid) {
+        return response.json({
+            status: false,
+            message: 'User ID and Event ID are required.'
+        });
+    }
+
+    const sql = "DELETE FROM events WHERE id = ? AND user = ?";
+
+    connection.query(sql, [eventid, user], (err, result) => {
+        if (err) {
+            return response.json({
+                status: false,
+                message: 'Error while deleting the event: ' + err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return response.json({
+                status: false,
+                message: 'Event not found or user not authorized.'
+            });
+        }
+
+        return response.json({
+            status: true,
+            message: 'Event successfully deleted.'
+        });
+    });
+});
+
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Service is up!');
