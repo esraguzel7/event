@@ -12,7 +12,7 @@ function HowItWorks() {
                         <p>Sign up or log in to access our event management system. Get started by creating your profile.</p>
                     </div>
                     <div className="col-md-6">
-                        <img src="path-to-your-image1.jpg" alt="User Registration/Login" className="img-fluid" />
+                        <img src="/assets/img/howitworks/info1.png" alt="User Registration/Login" className="img-fluid" />
                     </div>
                 </div>
 
@@ -22,7 +22,7 @@ function HowItWorks() {
                         <p>Create events with details like location, date, number of attendees, and ticket prices. Manage your events effortlessly.</p>
                     </div>
                     <div className="col-md-6 order-md-1">
-                        <img src="path-to-your-image2.jpg" alt="Event Creation" className="img-fluid" />
+                        <img src="/assets/img/howitworks/info2.png" alt="Event Creation" className="img-fluid" />
                     </div>
                 </div>
 

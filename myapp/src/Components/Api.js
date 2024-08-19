@@ -60,6 +60,31 @@ class Api {
 
         return data;
     }
+
+    getEvents = function (category = undefined, limit = undefined) {
+        const [data, setData] = useState([])
+
+        var query = '';
+
+        if (category !== undefined || limit !== undefined)
+            query = '?'
+
+        if (category !== undefined)
+            query = query + 'category=' + category + (limit !== undefined) ? '&&' : ''
+        
+        if (limit !== undefined)
+            query = query + 'limit=' + limit
+
+
+        useEffect(() => {
+            fetch(this.api_url + '/get-events' + query)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, [query]);
+
+        return data;
+    }
 }
 
 export default Api;
