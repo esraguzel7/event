@@ -197,7 +197,6 @@ app.get('/get-event', (request, response) => {
                 connection.query(participantsSql, [request.query.id], (participantErr, participantData) => {
                     if (participantErr) return response.json(participantErr);
 
-                    // Katılımcı sayısını result'a ekle
                     result['participant_count'] = participantData[0].participant_count;
 
                     return response.json(result);
@@ -255,6 +254,58 @@ app.get('/get-events', (request, response) => {
         return response.json(updatedEvents);
     });
 });
+
+
+/**
+ * Join event
+ */
+app.post('/join-event', (request, response) => {
+    const { userid, eventid } = request.body;
+
+    if (!userid || !eventid) {
+        return response.status(400).json({ status: false, message: "userid and eventid are required" });
+    }
+
+    const checkEventSql = "SELECT participant_limit FROM events WHERE id = ?";
+    const countParticipantsSql = "SELECT COUNT(*) AS current_participants FROM participants WHERE event = ?";
+    const checkDuplicateSql = "SELECT COUNT(*) AS existing_participation FROM participants WHERE event = ? AND user = ?";
+    const insertParticipantSql = "INSERT INTO participants (user, event) VALUES (?, ?)";
+
+    connection.query(checkEventSql, [eventid], (err, eventData) => {
+        if (err) return response.status(500).json({ status: false, message: "Something went wrong" });
+
+        if (eventData.length === 0) {
+            return response.status(404).json({ status: false, message: "Event not found" });
+        }
+
+        const participantLimit = eventData[0].participant_limit;
+
+        connection.query(checkDuplicateSql, [eventid, userid], (duplicateErr, duplicateData) => {
+            if (duplicateErr) return response.status(500).json({ status: false, message: "Something went wrong" });
+
+            if (duplicateData[0].existing_participation > 0) {
+                return response.status(400).json({ status: false, message: "User has already joined this event" });
+            }
+
+            connection.query(countParticipantsSql, [eventid], (countErr, countData) => {
+                if (countErr) return response.status(500).json({ status: false, message: "Something went wrong" });
+
+                const currentParticipants = countData[0].current_participants;
+
+                if (currentParticipants >= participantLimit) {
+                    return response.status(400).json({ status: false, message: "The event is full. No more participants can join." });
+                }
+
+                connection.query(insertParticipantSql, [userid, eventid], (insertErr) => {
+                    if (insertErr) return response.status(500).json({ status: false, message: "Something went wrong" });
+
+                    return response.status(200).json({ status: true, message: "Successfully joined the event!" });
+                });
+            });
+        });
+    });
+});
+
 
 
 app.listen(process.env.APP_PORT, () => {

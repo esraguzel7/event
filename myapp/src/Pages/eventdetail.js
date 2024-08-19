@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 import Api from "../Components/Api";
+import ShowMessages from "../Components/ShowMessages";
 
 var api = new Api();
 
@@ -32,7 +33,7 @@ function EventDetail() {
 
                                 <p><strong>Date:</strong> <span id="event-date">{(new Date(event.start_date)).toDateString()}</span></p>
 
-                                <p><strong>Location:</strong> <a href={event.location_url} id="event-location-url" target="_blank">Event Location</a></p>
+                                <p><strong>Location:</strong> <a href={event.location_url} id="event-location-url" target="_blank" rel="noreferrer">Event Location</a></p>
 
                                 <p><strong>Participant Count:</strong> <span id="event-participant-limit">{event.participant_count}</span></p>
                                 <p><strong>Participant Limit:</strong> <span id="event-participant-limit">{event.participant_limit}</span></p>
@@ -45,7 +46,10 @@ function EventDetail() {
                                     </div>
                                 ) : (
                                     <div class="text-center">
-                                        <button id="join-event-btn" class="btn btn-primary btn-lg">Join Event</button>
+                                        <form onSubmit={(e) => joinEventHandler(e)} method="post">
+                                            <input type="hidden" name="eventid" value={event.id} />
+                                            <button type="submit" class="btn btn-primary btn-lg">Join Event</button>
+                                        </form>
                                     </div>
                                 )}
                             </div>
@@ -58,6 +62,47 @@ function EventDetail() {
             </div>
         </React.StrictMode>
     );
+}
+
+async function joinEventHandler(e) {
+    e.preventDefault();
+
+    var body = {
+        userid: api.getUserInfo().id,
+        eventid: e.target.querySelector('input[name=eventid]').value
+    }
+
+    try {
+        const response = await fetch('http://localhost:5001/join-event', {
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+        var result = data;
+
+        let message = null;
+
+        if (result.status === false) {
+            message = ShowMessages.ShowErrorMessage(result.message);
+        } else {
+            message = ShowMessages.ShowSuccessMessage(result.message);
+            setTimeout(() => {
+                window.location.reload();
+            }, 2500);
+        }
+
+        e.target.insertBefore(message, e.target.querySelector('button[type=submit]'));
+        setTimeout(() => {
+            message.remove()
+        }, 2500);
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 export default EventDetail;
