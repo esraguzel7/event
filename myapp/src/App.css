@@ -187,3 +187,7 @@ footer.footer p:last-child {
   background-color: #ddd;
   text-decoration: none;
 }
+
+.owl-carousel h2{
+  color: #fff;
+}

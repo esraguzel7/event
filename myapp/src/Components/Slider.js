@@ -5,11 +5,17 @@ function Slider() {
         <div class='container'>
             <div class="owl-carousel owl-theme">
                 <SliderImage
-                    image_url='https://picsum.photos/1110/400'
-                    title='Test Title'
-                    description='Event description'
+                    image_url='/assets/img/slider/slider1.jpg'
+                    title='Are you ready for fun?'
+                    description='Join us now and add color to your life...'
+                    button_text='Sign Up'
+                    button_link='/signup' />
+                <SliderImage
+                    image_url='/assets/img/slider/slider2.jpg'
+                    title='How it working?'
+                    description='Do you want to learn how to catch the most fun events?'
                     button_text='Read More'
-                    button_link='/' />
+                    button_link='/how-it-works' />
             </div>
         </div>
     );
