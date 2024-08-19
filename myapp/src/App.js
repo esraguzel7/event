@@ -7,6 +7,7 @@ import MyEvents from './Pages/myevents';
 import Signup from './Pages/singup';
 import EventCategory from './Pages/eventcategory';
 import EventDetail from './Pages/eventdetail';
+import EditMyEvents from './Pages/editmyevent';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='my-events' element={<MyEvents />} />
         <Route path='events/:id' element={<EventCategory />} />
         <Route path='event/:id' element={<EventDetail />} />
+        <Route path='my-events/edit/:id' element={<EditMyEvents />} />
       </Routes>
     </BrowserRouter>
   )

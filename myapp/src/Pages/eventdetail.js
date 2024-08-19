@@ -12,8 +12,6 @@ function EventDetail() {
     let { id } = useParams();
 
     var event = api.getSingleEvent(id)
-    console.log(event);
-
 
     return (
         <React.StrictMode>

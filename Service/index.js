@@ -307,6 +307,50 @@ app.post('/join-event', (request, response) => {
 });
 
 
+/**
+ * Update event
+ */
+app.post('/update-event', (request, response) => {
+    const { user, eventid, category, title, description, location_url, participant_limit, price, start_date } = request.body;
+
+    // Check if all required fields are provided
+    if (!user || !eventid || !category || !title || !description || !location_url || !start_date) {
+        return response.json({ status: false, message: 'All fields are required' });
+    }
+
+    const sqlCheckEvent = "SELECT * FROM events WHERE id = ? AND user = ?";
+    const sqlUpdateEvent = `
+        UPDATE events
+        SET category = ?, title = ?, description = ?, location_url = ?, participant_limit = ?, price = ?, start_date = ?, updated_at = NOW()
+        WHERE id = ? AND user = ?
+    `;
+
+    // Check if the event exists and belongs to the user
+    connection.query(sqlCheckEvent, [eventid, user], (err, data) => {
+        if (err) {
+            return response.json({ status: false, message: 'Database error: ' + err.message });
+        }
+
+        if (data.length === 0) {
+            return response.json({ status: false, message: 'Event not found or you do not have permission to update this event' });
+        }
+
+        // Proceed to update the event
+        connection.query(sqlUpdateEvent, [category, title, description, location_url, participant_limit, price, start_date, eventid, user], (updateErr, updateResult) => {
+            if (updateErr) {
+                return response.json({ status: false, message: 'Failed to update event: ' + updateErr.message });
+            }
+
+            if (updateResult.affectedRows > 0) {
+                return response.json({ status: true, message: 'Event updated successfully' });
+            } else {
+                return response.json({ status: false, message: 'No changes made to the event' });
+            }
+        });
+    });
+});
+
+
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Service is up!');
