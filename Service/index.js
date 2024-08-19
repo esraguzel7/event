@@ -351,6 +351,42 @@ app.post('/update-event', (request, response) => {
 });
 
 
+/**
+ * Search in all events
+ */
+app.get('/search-event', (request, response) => {
+    const searchTerm = request.query.query;
+
+    if (!searchTerm || searchTerm.trim() === '') {
+        return response.json({ status: false, message: 'Search term cannot be empty.' });
+    }
+
+    const sqlParams = [];
+
+    let sql = "SELECT * FROM events WHERE title LIKE ? OR title LIKE ? OR title LIKE ?";
+    sqlParams.push(`%${searchTerm}%`);
+    sqlParams.push(`${searchTerm}%`);
+    sqlParams.push(`%${searchTerm}`);
+
+    if (request.query.limit) {
+        sql += " LIMIT ?";
+        sqlParams.push(parseInt(request.query.limit));
+    }
+
+    connection.query(sql, sqlParams, (err, data) => {
+        if (err) {
+            return response.json({ status: false, message: 'Error occurred while searching events.' });
+        }
+
+        if (data.length > 0) {
+            return response.json({ status: true, message: 'Events found.', data: data });
+        } else {
+            return response.json({ status: true, message: 'No events found matching the search term.', data: [] });
+        }
+    });
+});
+
+
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Service is up!');

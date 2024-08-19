@@ -80,10 +80,6 @@ class Api {
         if (limit !== undefined)
             query += 'limit=' + limit
 
-        console.log(query);
-
-
-
         useEffect(() => {
             fetch(this.api_url + '/get-events' + query)
                 .then(response => response.json())
@@ -94,6 +90,23 @@ class Api {
         if (Array.isArray(data))
             return data;
         return [];
+    }
+
+    searchEvent = function (searchText, limit = 6) {
+        const [data, setData] = useState([])
+
+        var query = '?query=' + String(searchText);
+
+        query += (limit !== undefined) ? ('&&limit=' + limit) : ''
+
+        useEffect(() => {
+            fetch(this.api_url + '/search-event' + query)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, [query]);
+
+        return data;
     }
 }
 

@@ -4,8 +4,6 @@ import Api from "./Api";
 var api = new Api();
 
 function SmallEvent(args) {
-    console.log(args);
-
     if (!('id' in args))
         return;
 
