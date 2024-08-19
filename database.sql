@@ -29,12 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `events` (
   `id` int NOT NULL,
+  `user` int NOT NULL,
   `category` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `participant_limit` int DEFAULT NULL,
   `location_url` varchar(512) NOT NULL,
   `price` decimal(16,8) NOT NULL,
+  `start_date` date NOT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -93,7 +95,8 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category`);
+  ADD KEY `category` (`category`),
+  ADD KEY `user` (`user`);
 
 --
 -- Indexes for table `event_categories`
@@ -153,7 +156,8 @@ ALTER TABLE `user`
 -- Constraints for table `events`
 --
 ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`category`) REFERENCES `event_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`category`) REFERENCES `event_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `participants`
