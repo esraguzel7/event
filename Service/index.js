@@ -90,6 +90,7 @@ app.post('/login', (request, response) => {
             'id': user.id,
             'name': user.name,
             'surname': user.surname,
+            'role': user.role,
             'email': user.email
         }, process.env.JWT_SECRET, { expiresIn: '6h' })
         return response.json({ 'status': true, 'message': 'Welcome back', 'token': token });
@@ -400,29 +401,58 @@ app.post('/delete-event', (request, response) => {
         });
     }
 
-    const sql = "DELETE FROM events WHERE id = ? AND user = ?";
-
-    connection.query(sql, [eventid, user], (err, result) => {
-        if (err) {
+    const roleSql = "SELECT role FROM user WHERE id = ?";
+    connection.query(roleSql, [user], (roleErr, roleData) => {
+        if (roleErr) {
             return response.json({
                 status: false,
-                message: 'Error while deleting the event: ' + err.message
+                message: 'Error while checking user role: ' + roleErr.message
             });
         }
 
-        if (result.affectedRows === 0) {
+        if (roleData.length === 0) {
             return response.json({
                 status: false,
-                message: 'Event not found or user not authorized.'
+                message: 'User not found.'
             });
         }
 
-        return response.json({
-            status: true,
-            message: 'Event successfully deleted.'
+        const userRole = roleData[0].role;
+
+        let sql;
+        let params;
+
+        if (userRole === 'admin') {
+            sql = "DELETE FROM events WHERE id = ?";
+            params = [eventid];
+        } else {
+            sql = "DELETE FROM events WHERE id = ? AND user = ?";
+            params = [eventid, user];
+        }
+
+        connection.query(sql, params, (err, result) => {
+            if (err) {
+                return response.json({
+                    status: false,
+                    message: 'Error while deleting the event: ' + err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return response.json({
+                    status: false,
+                    message: 'Event not found or user not authorized.'
+                });
+            }
+
+            return response.json({
+                status: true,
+                message: 'Event successfully deleted.'
+            });
         });
     });
 });
+
 
 
 app.listen(process.env.APP_PORT, () => {

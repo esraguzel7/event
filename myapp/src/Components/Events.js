@@ -14,6 +14,8 @@ function SmallEvent(args) {
         event = api.getSingleEvent(args.id)
     }
 
+    var userInfo = api.getUserInfo();
+
     var eventLink = (<a href={"/event/" + event.id} class="event-link">&#127881; Join the Event</a>);
     if ('isEditable' in args) {
         eventLink = (
@@ -22,6 +24,15 @@ function SmallEvent(args) {
                 <a href="/" class="btn btn-outline-danger event-delete-link" data-eventid={event.id} onClick={deleteEventHangler}>Del</a>
             </React.StrictMode>
         );
+    } else if (userInfo && userInfo.role === 'admin') {
+
+        eventLink = (
+            <React.StrictMode>
+                <a href={"/event/" + event.id} class="event-link">&#127881; Join the Event</a>
+                <a href="/" class="btn btn-outline-danger event-delete-link" data-eventid={event.id} onClick={deleteEventHangler}>Del</a>
+            </React.StrictMode>
+        );
+
     }
 
     return (

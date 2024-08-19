@@ -54,9 +54,11 @@ function MenuButtons() {
         localStorage.clear()
         window.location = '/'
     }
-
+    console.log(userInfo);
+    
     return (
         <React.Fragment>
+            {(userInfo.role === 'admin')? (<strong class="mr-3 text-muted">You'r Admin</strong>): ''}
             <a class="btn btn-sm btn-outline-secondary" href="/my-events">My Events</a>&nbsp;
             <a class="btn btn-sm btn-outline-danger" href="/" onClick={(e) => logoutHandler(e)}>Logout</a>
         </React.Fragment>
