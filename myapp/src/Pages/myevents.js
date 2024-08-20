@@ -3,7 +3,7 @@ import React from "react";
 import Api from "../Components/Api";
 import Return502 from "./error502";
 import ShowMessages from "../Components/ShowMessages";
-import SmallEvent from "../Components/Events";
+import { SmallEvent, ParticipatedEvents } from "../Components/Events";
 
 var api = new Api();
 
@@ -15,6 +15,25 @@ function MyEvents() {
     }
 
     var userInfo = api.getUserInfo();
+
+    var adminHtml = "";
+
+    if (userInfo.role === 'admin') {
+        adminHtml = (
+            <React.StrictMode>
+                <hr />
+                <h3 class="mb-3">Participants</h3>
+
+                <div class="row">
+                    {api.getAdminParticipants().map((data, index) => (
+                        <div class="col-sm-12">
+                            <ParticipatedEvents id={data.id} obj={data} isAdmin />
+                        </div>
+                    ))}
+                </div>
+            </React.StrictMode>
+        );
+    }
 
     return (
         <React.StrictMode>
@@ -61,7 +80,7 @@ function MyEvents() {
 
                 <hr />
 
-                <h3 class="mb-3">Your Events</h3>
+                <h3 class="mb-3">Activities You Created</h3>
 
                 <div class="row">
                     {api.getUserEvents().map((data, index) => (
@@ -70,6 +89,19 @@ function MyEvents() {
                         </div>
                     ))}
                 </div>
+
+                <hr />
+                <h3 class="mb-3">Events You Participated in</h3>
+
+                <div class="row">
+                    {api.getParticipatedEvents().map((data, index) => (
+                        <div class="col-sm-12">
+                            <ParticipatedEvents id={data.id} obj={data} />
+                        </div>
+                    ))}
+                </div>
+
+                {adminHtml}
             </div>
         </React.StrictMode>
     );

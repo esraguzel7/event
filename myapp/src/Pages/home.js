@@ -1,7 +1,7 @@
 import React from "react";
 
 import Slider from "../Components/Slider";
-import SmallEvent from "../Components/Events";
+import { SmallEvent } from "../Components/Events";
 import Api from "../Components/Api";
 import { useSearchParams } from "react-router-dom";
 
@@ -9,17 +9,17 @@ var api = new Api();
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
-  var eventList = [];  
+  var eventList = [];
   var searchText = searchParams.get('search');
-  
-  if(searchText){
+
+  if (searchText) {
     let result = api.searchEvent(searchText)
-    if(result.status === true)
+    if (result.status === true)
       eventList = result.data
-  }else{
+  } else {
     eventList = api.getEvents(undefined, 6)
   }
-  
+
   return (
     <React.StrictMode>
       <Slider />

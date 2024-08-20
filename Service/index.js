@@ -453,6 +453,144 @@ app.post('/delete-event', (request, response) => {
     });
 });
 
+app.get('/get-joined-events', (request, response) => {
+    const userId = request.query.user_id;
+
+    if (!userId) {
+        return response.json({ 'status': false, 'message': 'User ID is required' });
+    }
+
+    const sql = `
+        SELECT 
+            p.id AS participation_id, 
+            p.created_at, 
+            u.id AS user_id, 
+            u.name, 
+            u.surname, 
+            u.email, 
+            e.title, 
+            e.description, 
+            e.location_url, 
+            e.price, 
+            e.start_date 
+        FROM 
+            participants p 
+        JOIN 
+            user u ON p.user = u.id 
+        JOIN 
+            events e ON p.event = e.id 
+        WHERE 
+            p.user = ?
+    `;
+
+    connection.query(sql, [userId], (err, results) => {
+        if (err) {
+            return response.json({ 'status': false, 'message': err.message });
+        }
+
+        console.log(results);
+        
+
+        return response.json({ 
+            'status': true, 
+            'message': 'Joined events retrieved successfully', 
+            'data': results 
+        });
+    });
+});
+
+app.get('/get-admin-joined-events', (request, response) => {
+    const userId = request.query.user_id;
+
+    if (!userId) {
+        return response.json({ 'status': false, 'message': 'User ID is required' });
+    }
+
+    const roleCheckSql = "SELECT role FROM user WHERE id = ?";
+    
+    connection.query(roleCheckSql, [userId], (err, roleResults) => {
+        if (err) {
+            return response.json({ 'status': false, 'message': err.message });
+        }
+
+        if (roleResults.length === 0) {
+            return response.json({ 'status': false, 'message': 'User not found' });
+        }
+
+        const userRole = roleResults[0].role;
+
+        let sql;
+        let params;
+
+        if (userRole === 'admin') {
+            sql = `
+                SELECT 
+                    p.id AS participation_id, 
+                    p.created_at, 
+                    e.id AS event_id, 
+                    u.id AS user_id, 
+                    u.name, 
+                    u.surname, 
+                    u.email, 
+                    e.title, 
+                    e.description, 
+                    e.location_url, 
+                    e.price, 
+                    e.start_date 
+                FROM 
+                    participants p 
+                JOIN 
+                    user u ON p.user = u.id 
+                JOIN 
+                    events e ON p.event = e.id
+            `;
+            params = [];
+        } else {
+            return response.json({ 'status': false, 'message': 'You do not have sufficient authorizations for this area' });
+        }
+
+        connection.query(sql, params, (err, results) => {
+            if (err) {
+                return response.json({ 'status': false, 'message': err.message });
+            }
+
+            console.log(results);
+
+            return response.json({ 
+                'status': true, 
+                'message': 'Joined events retrieved successfully', 
+                'data': results 
+            });
+        });
+    });
+});
+
+
+app.post('/cancel-joined-event', (request, response) => {
+    const { user, event } = request.body;
+
+    if (!(user && event)) {
+        return response.json({ 'status': false, 'message': 'User ID and Event ID are required' });
+    }
+
+    console.log(user);
+    console.log(event);
+    
+
+    const sql = "DELETE FROM participants WHERE user = ? AND event = ?";
+
+    connection.query(sql, [user, event], (err, result) => {
+        if (err) {
+            return response.json({ 'status': false, 'message': err.message });
+        }
+
+        if (result.affectedRows > 0) {
+            return response.json({ 'status': true, 'message': 'Event participation cancelled successfully' });
+        } else {
+            return response.json({ 'status': false, 'message': 'No matching participation found' });
+        }
+    });
+});
 
 
 app.listen(process.env.APP_PORT, () => {

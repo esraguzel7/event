@@ -3,7 +3,7 @@ import {
     useParams
 } from "react-router-dom";
 
-import SmallEvent from "../Components/Events";
+import { SmallEvent } from "../Components/Events";
 import Api from "../Components/Api";
 
 var api = new Api();
@@ -12,7 +12,7 @@ function EventCategory() {
     let { id } = useParams();
 
     var event = api.getEvents(id)
-    
+
     return (
         <React.StrictMode>
             <div class='container'>

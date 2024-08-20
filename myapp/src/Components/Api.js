@@ -108,6 +108,40 @@ class Api {
 
         return data;
     }
+
+    getParticipatedEvents = function () {
+        const [data, setData] = useState([])
+
+        var query = '?user_id=' + this.getUserInfo().id;
+
+        useEffect(() => {
+            fetch(this.api_url + '/get-joined-events' + query)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, [query]);
+
+        if (data.status === true)
+            return data.data;
+        return [];
+    }
+
+    getAdminParticipants = function () {
+        const [data, setData] = useState([])
+
+        var query = '?user_id=' + this.getUserInfo().id;
+
+        useEffect(() => {
+            fetch(this.api_url + '/get-admin-joined-events' + query)
+                .then(response => response.json())
+                .then(data => setData(data))
+                .catch(error => console.log(error));
+        }, [query]);
+
+        if (data.status === true)
+            return data.data;
+        return [];
+    }
 }
 
 export default Api;

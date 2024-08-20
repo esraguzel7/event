@@ -54,7 +54,6 @@ function MenuButtons() {
         localStorage.clear()
         window.location = '/'
     }
-    console.log(userInfo);
     
     return (
         <React.Fragment>
