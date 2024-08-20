@@ -465,6 +465,7 @@ app.get('/get-joined-events', (request, response) => {
             p.id AS participation_id, 
             p.created_at, 
             u.id AS user_id, 
+            e.id AS event_id,
             u.name, 
             u.surname, 
             u.email, 
